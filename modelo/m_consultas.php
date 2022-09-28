@@ -1087,4 +1087,25 @@ class Consultas extends Conexion
         }
         return $listPreceptores;
     }
+
+    public function listarAdmin($dniAdminActual)
+    {
+        try {
+            $link = parent::Conexion();
+            $sql = "SELECT u.dni, u.nombre, u.apellido, u.correo, u.celular, u.domicilio, r.id, r.nombreRol, d.nombre 
+                    from usuario u, rolusuario r, departamentos d
+                    where u.idRol = r.id and u.idRol = 3
+                    and u.codPostal2 = d.codPostal and u.dni != '$dniAdminActual'";
+            $result = mysqli_query($link, $sql);
+            $listAdmin = [];
+            $i = 0;
+            while ($row = mysqli_fetch_row($result)) {
+                $listAdmin[$i] = $row;
+                $i++;
+            }
+        } catch (Exception $e) {
+            die('Error: ' . $e->getMessage());
+        }
+        return $listAdmin;
+    }
 }

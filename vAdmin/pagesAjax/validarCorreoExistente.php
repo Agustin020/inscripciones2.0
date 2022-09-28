@@ -3,18 +3,21 @@
 require('../../modelo/m_conexionPage.php');
 $link = conexion();
 
-$correo = $_POST["correo"];
+$email = $_POST["correo"];
 
-$sql = "SELECT * from usuario u where u.correo = '$correo'";
+$html = '';
+
+$correo = mysqli_real_escape_string($link, $email);
+
+$sql = "SELECT count(*) from usuario u where u.correo = '$correo'";
 $result = mysqli_query($link, $sql);
 
-if (mysqli_num_rows($result) > 0) {
-    echo 'Al parecer el correo ingresado ya esta registrado por un usuario. Intente nuevamente
-    <script>
-        $("#btnSubmit").prop("disabled", true);
-    </script>';
-}else{
-    echo '<script>
-    $("#btnSubmit").prop("disabled", false);
-    </script>';
+while ($row = mysqli_fetch_row($result)) {
+    $contCorreos = $row[0];
 }
+
+if ($contCorreos == 1) {
+    $html .= 'El correo ingresado ya esta registrado por un usuario. Intente nuevamente';
+}
+
+echo $html;

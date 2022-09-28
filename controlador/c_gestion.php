@@ -164,4 +164,17 @@ class ControladorGestion
         }
         require('listarPreceptores.php');
     }
+
+    public function listarAdminsContr()
+    {
+        require('../modelo/m_consultas.php');
+        $co = new Consultas();
+        echo '<title>Listado de administradores</title>';
+        $listAdmin = $co->listarAdmin($_SESSION['dni']);
+        require('libreria.php');
+        if (isset($_SESSION['rol'])) {
+            require('header.php');
+        }
+        require('listarAdmins.php');
+    }
 }

@@ -9,7 +9,8 @@ $anio = $_POST['anio'];
 $sede = $_POST['sede'];
 $dni = $_POST['dni'];
 
-$rolPreceptor = $_POST['rolPreceptor'];
+$rol = $_POST['rolUsuario'];
+
 
 if ($_SESSION['rol'] == 2) {
     if ($co->bajaUsuario($motivoBaja, $dni)) {
@@ -17,10 +18,15 @@ if ($_SESSION['rol'] == 2) {
         header('Location: ../vAdmin/index.php?accion=listarEstudiantes&anio&anio=' . $anio . '&sede=' . $sede);
     }
 } else if ($_SESSION['rol'] == 3) {
-    if ($rolPreceptor == 2) {
+    if ($rolUsuario == 2) {
         if ($co->bajaUsuario($motivoBaja, $dni)) {
             $_SESSION['bajaPreceptorOk'] = true;
             header('Location: ../vAdmin/index.php?accion=listarPreceptores');
+        }
+    } else if ($rolUsuario == 3) {
+        if ($co->bajaUsuario($motivoBaja, $dni)) {
+            $_SESSION['bajaAdminOk'] = true;
+            header('Location: ../vAdmin/index.php?accion=listarAdmins');
         }
     } else {
         if ($co->bajaUsuario($motivoBaja, $dni)) {

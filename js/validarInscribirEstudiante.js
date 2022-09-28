@@ -2,7 +2,7 @@ const frmInscribir = document.getElementById('frmInscribir');
 const estudiante = document.getElementById('estudiantesSelect');
 const anio = document.getElementById('selectAnio');
 const carrera = document.getElementById('selectCarrera');
-const btnSubmit = document.getElementById('btnSubmit');
+const btnAplicarInscripcion = document.getElementById('btnAplicarInscripcion');
 
 const frmInscribirElements = {
     estudiante: false,
@@ -24,7 +24,7 @@ frmInscribir.addEventListener('submit', (e) => {
     }
 });
 
-btnSubmit.addEventListener('click', (e) => {
+btnAplicarInscripcion.addEventListener('click', (e) => {
     if ($('#resultadoMaterias input[type=checkbox]:checked').length === 0) {
         document.getElementById('errorMaterias').innerHTML = 'Debe seleccionar las materias';
         frmInscribirElements.materias = false;

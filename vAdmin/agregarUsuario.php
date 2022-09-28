@@ -64,7 +64,7 @@ if (isset($_SESSION['rol'])) {
                         }
                     });
                 }
-                
+
                 function validarCorreoExistente(correo) {
                     $.ajax({
                         type: 'POST',
@@ -201,8 +201,9 @@ if (isset($_SESSION['rol'])) {
 
                                         <div class="col-xxl">
                                             <label for="" class="form-label">Correo (*)</label>
-                                            <input type="email" class="form-control" oninput="validarCorreoExistente(this);" name="correo" id="correo2" aria-describedby="helpId" placeholder="" maxlength="50" required>
+                                            <input type="email" class="form-control" onchange="validarCorreoExistente(this);" oninput="validarCorreoExistente(this);" name="correo" id="correo2" aria-describedby="helpId" placeholder="" maxlength="50" required>
                                             <small id="correoError2" class="text-danger"></small>
+                                            <small id="correoRepetido2" class="text-danger"></small>
                                         </div>
 
                                     </div>
@@ -211,8 +212,9 @@ if (isset($_SESSION['rol'])) {
 
                                         <div class="col-xxl">
                                             <label for="" class="form-label">Nombre de usuario (*)</label>
-                                            <input type="text" class="form-control" name="usuario" id="username2" aria-describedby="helpId" placeholder="" maxlength="45" required>
-                                            <small id="userError2"></small>
+                                            <input type="text" class="form-control" onchange="validarUsernameExistente(this);" oninput="validarUsernameExistente(this);" name="usuario" id="username2" aria-describedby="helpId" placeholder="" maxlength="45" required>
+                                            <small id="userError2" class="text-danger"></small>
+                                            <small id="userRepetido2" class="text-danger"></small>
                                         </div>
 
                                         <div class="col-xxl">

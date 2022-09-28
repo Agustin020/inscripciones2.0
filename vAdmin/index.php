@@ -69,4 +69,9 @@ switch ($accion) {
         $controlador = new ControladorGestion();
         $controlador->listarPreceptoresContr();
         break;
+    case 'listarAdmins':
+        require('../controlador/c_gestion.php');
+        $controlador = new ControladorGestion();
+        $controlador->listarAdminsContr();
+        break;
 }

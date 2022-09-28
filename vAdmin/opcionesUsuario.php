@@ -17,62 +17,8 @@ if (isset($_SESSION['rol'])) {
                 section {
                     padding: 15px;
                 }
-
-                section .tarjetas {
-                    display: flex;
-                    flex-direction: row;
-                    justify-content: space-evenly;
-                }
             </style>
 
-            <script>
-                function confirmarAlta() {
-                    var nombre = document.getElementsByTagName("td")[1].innerHTML;
-                    var apellido = document.getElementsByTagName("td")[2].innerHTML;
-                    event.preventDefault();
-                    Swal.fire({
-                        title: 'Aviso',
-                        text: 'Desea dar de alta al estudiante ' + nombre + ' ' + apellido + '?',
-                        icon: 'warning',
-                        showCancelButton: true,
-                        confirmButtonColor: '#198754',
-                        cancelButtonColor: '#d33',
-                        confirmButtonText: 'Si',
-                        cancelButtonText: 'No',
-                    }).then((result) => {
-                        if (result.isConfirmed) {
-                            var btnAlta = document.getElementById('altabtn');
-                            location.href = btnAlta;
-                        }
-                        return false;
-
-                    });
-                }
-
-
-                function confirmarBaja() {
-                    var nombre = document.getElementsByTagName("td")[1].innerHTML;
-                    var apellido = document.getElementsByTagName("td")[2].innerHTML;
-                    event.preventDefault();
-                    Swal.fire({
-                        title: 'Aviso',
-                        text: 'Eliminar al estudiante ' + nombre + ' ' + apellido + '?',
-                        icon: 'warning',
-                        showCancelButton: true,
-                        confirmButtonColor: '#198754',
-                        cancelButtonColor: '#d33',
-                        confirmButtonText: 'Si',
-                        cancelButtonText: 'No',
-                    }).then((result) => {
-                        if (result.isConfirmed) {
-                            var btnBaja = document.getElementById('bajabtn');
-                            location.href = btnBaja;
-                        }
-                        return false;
-
-                    });
-                }
-            </script>
         </head>
 
         <body>
@@ -83,26 +29,49 @@ if (isset($_SESSION['rol'])) {
 
                 <p class="fs-5">Gestión de Usuarios</p>
 
-                <div class="tarjetas">
-                    <div class="card">
-                        <div class="card-body">
-                            <h5 class="card-title">Agregar Usuario</h5>
-                            <p class="card-text">Añadir un usuario al Sistema y asignarle el rol correspondiente.</p>
-                            <a href="index.php?accion=agregarUsuario" class="btn btn-primary">Ver</a>
+                <div class="container">
+                    <div class="row mb-3">
+                        <div class="col-xxl">
+                            <div class="card">
+                                <div class="card-body">
+                                    <h5 class="card-title">Agregar Usuario</h5>
+                                    <p class="card-text">Añadir un usuario al Sistema y asignarle el rol correspondiente.</p>
+                                    <a href="index.php?accion=agregarUsuario" class="btn btn-primary">Ver</a>
+                                </div>
+                            </div>
                         </div>
-                    </div>
-                    <div class="card">
-                        <div class="card-body">
-                            <h5 class="card-title">Lista de Estudiantes</h5>
-                            <p class="card-text">Mostrar el listado de todos los estudiantes en el Sistema</p>
-                            <a href="index.php?accion=listarEstudiantesAdmin&anio=1" class="btn btn-primary">Ver</a>
+
+                        <div class="col-xxl">
+                            <div class="card">
+                                <div class="card-body">
+                                    <h5 class="card-title">Lista de Estudiantes</h5>
+                                    <p class="card-text">Mostrar el listado de todos los estudiantes en el Sistema</p>
+                                    <a href="index.php?accion=listarEstudiantesAdmin&anio=1" class="btn btn-primary">Ver</a>
+                                </div>
+                            </div>
                         </div>
+
                     </div>
-                    <div class="card">
-                        <div class="card-body">
-                            <h5 class="card-title">Lista de Preceptores</h5>
-                            <p class="card-text">Mostrar el listado de todos los preceptores en el Sistema</p>
-                            <a href="index.php?accion=listarPreceptores" class="btn btn-primary">Ver</a>
+
+                    <div class="row">
+                        <div class="col-xxl">
+                            <div class="card">
+                                <div class="card-body">
+                                    <h5 class="card-title">Lista de Preceptores</h5>
+                                    <p class="card-text">Mostrar el listado de todos los preceptores en el Sistema</p>
+                                    <a href="index.php?accion=listarPreceptores" class="btn btn-primary">Ver</a>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-xxl">
+                            <div class="card">
+                                <div class="card-body">
+                                    <h5 class="card-title">Lista de Administradores</h5>
+                                    <p class="card-text">Mostrar el listado de todos los administradores en el Sistema</p>
+                                    <a href="index.php?accion=listarAdmins" class="btn btn-primary">Ver</a>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>

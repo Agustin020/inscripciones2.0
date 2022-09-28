@@ -210,7 +210,7 @@ if (isset($_SESSION['rol'])) {
                         ?>
 
                         <div id="materias">
-                            
+
                         </div>
 
                         <div id="btnEnviar">
@@ -260,7 +260,7 @@ if (isset($_SESSION['rol'])) {
 
                                     <div class="row">
                                         <div class="mb-3">
-                                            <label for="" class="form-label">Materias inscriptas</label>
+                                            <label for="" class="form-label">Solicitud de materias a inscribirse</label>
                                             <textarea class="form-control" name="" id="" rows="7" disabled><?= $inscripcion[7]; ?></textarea>
                                         </div>
                                     </div>
@@ -299,6 +299,32 @@ if (isset($_SESSION['rol'])) {
                                     </div>
 
                                     <?php
+                                    if ($inscripcion[10] == 1) {
+                                    ?>
+
+                                        <p class="fs-6">Materias en las que se te inscribió</p>
+                                        <?php
+                                        require_once('../modelo/m_consultas.php');
+                                        $co = new Consultas();
+                                        $matInsc = $co->listarCalificacionesEstudiante($inscripcion[0]);
+                                        foreach ($matInsc as $materia) {
+                                        ?>
+
+                                            <div class="form-check">
+                                                <input class="form-check-input" type="checkbox" value="" id="" disabled checked>
+                                                <label class="form-check-label" for="">
+                                                    <?= $materia[0]; ?>
+                                                </label>
+                                            </div>
+
+                                        <?php
+                                        }
+                                        ?>
+
+                                    <?php
+
+                                    }
+
                                     if ($inscripcion[11] != '') {
                                         $retroalimentacion = $inscripcion[11];
                                     } else {

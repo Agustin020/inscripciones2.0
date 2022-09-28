@@ -79,9 +79,9 @@ if (isset($_SESSION['rol'])) {
 
                 function mostrarMateriasCarrera(selectCarrera) {
                     var codCarrera = selectCarrera.value;
-                    if(codCarrera === ''){
+                    if (codCarrera === '') {
                         $('#seccionMaterias').hide();
-                    }else{
+                    } else {
                         $('#seccionMaterias').show();
                     }
                     $.ajax({
@@ -171,7 +171,7 @@ if (isset($_SESSION['rol'])) {
                         foreach ($listInscripcion as $datoInscripcion) {
                         ?>
                             <div class="container-fields">
-                                <div class="col" id="fields">
+                                <div class="col-xxl" id="fields">
 
                                     <form class="row g-3">
                                         <div class="col-md-6">
@@ -383,13 +383,38 @@ if (isset($_SESSION['rol'])) {
 
                                                 </ul>
                                                 <div id="btnEnviar">
-                                                    <button type="submit" id="btnSubmit" class="btn btn-primary">Aceptar</button>
+                                                    <button type="submit" id="btnAplicarInscripcion" class="btn btn-primary">Aceptar</button>
                                                 </div>
 
                                             </div>
                                         </div>
                                     </form>
                                 </div>
+                            <?php
+                            } else if ($datoInscripcion[10] == 1) {
+                            ?>
+
+                                <div class="col-xxl">
+                                    <p class="fs-6">Materias en las que se encuentra inscripto el estudiante</p>
+                                    <?php
+                                    require_once('../modelo/m_consultas.php');
+                                    $co = new Consultas();
+                                    $matInsc = $co->listarCalificacionesEstudiante($_GET['dni']);
+                                    foreach ($matInsc as $materia) {
+                                    ?>
+
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox" value="" id="" disabled checked>
+                                            <label class="form-check-label" for="">
+                                                <?= $materia[0]; ?>
+                                            </label>
+                                        </div>
+
+                                    <?php
+                                    }
+                                    ?>
+                                </div>
+
                             <?php
                             }
                             ?>

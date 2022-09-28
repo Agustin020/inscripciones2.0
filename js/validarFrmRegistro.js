@@ -15,9 +15,11 @@ const formElements = {
     apellido: false,
     departamento: false,
     email: false,
+    emailvalid: false,
     dni: false,
     cel: false,
     username: false,
+    usernamevalid: false,
     password: false
 }
 
@@ -88,12 +90,31 @@ function validarDepartamentos(valor) {
     }
 }
 
+//METODO AJAX: COMPRUEBA CORREO EXISTENTE
+function validarCorreoExistente(correo) {
+    $.ajax({
+        type: 'POST',
+        url: 'vAdmin/pagesAjax/validarCorreoExistente.php',
+        data: 'correo=' + correo.value,
+        success: function (r) {
+            if (!$.trim(r)) {
+                $('#correoRepetido').html(r);
+                formElements.emailvalid = true;
+            } else {
+                $('#correoRepetido').html(r);
+                formElements.emailvalid = false;
+            }
+        }
+    });
+}
+
+
 email.addEventListener('input', (e) => {
     e.target.value = e.target.value.replace(' ', '');
 });
 
 email.addEventListener('input', (e) => {
-   e.target.value = e.target.value.replace(' ', ''); 
+    e.target.value = e.target.value.replace(' ', '');
 });
 
 email.addEventListener('change', (e) => {
@@ -124,12 +145,12 @@ dni.addEventListener('input', (e) => {
         document.getElementById('dniError').innerHTML = '';
         formElements.dni = true;
     }
-    
-    if(dni < 10000000 || dni > 47000000){
+
+    if (dni < 10000000 || dni > 47000000) {
         document.getElementById('dniError').innerHTML = 'El DNI debe tener entre 10000000 y 47000000';
         $('#dniError').css("color", "#F14B4B");
         formElements.dni = false;
-    }else{
+    } else {
         document.getElementById('dniError').innerHTML = '';
         formElements.dni = true;
     }
@@ -154,6 +175,7 @@ cel.addEventListener('input', (e) => {
 
 });
 
+
 username.addEventListener('input', (e) => {
     e.target.value = e.target.value.replace(' ', '');
     e.target.value = e.target.value.replace('\'', '"');
@@ -172,6 +194,23 @@ username.addEventListener('input', (e) => {
         formElements.username = true;
     }
 });
+
+function validarUsernameExistente(username) {
+    $.ajax({
+        type: 'POST',
+        url: 'vAdmin/pagesAjax/validarUsernameExistente.php',
+        data: 'username=' + username.value,
+        success: function (r) {
+            if (!$.trim(r)) {
+                $('#userRepetido').html(r);
+                formElements.usernamevalid = true;
+            } else {
+                $('#userRepetido').html(r);
+                formElements.usernamevalid = false;
+            }
+        }
+    })
+}
 
 password.addEventListener('input', (e) => {
     e.target.value = e.target.value.replace(' ', '');

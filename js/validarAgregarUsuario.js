@@ -23,7 +23,9 @@ const formElements2 = {
     name: false, //Trae valor True o False
     apellido: false,
     correo: false,
+    correoValid: false,
     username: false,
+    usernameValid: false,
     pass: false,
     domicilio: true, //TRUE porque no son obligatorios
     codPostal: true,
@@ -140,6 +142,23 @@ correo2.addEventListener('change', (e) => {
     }
 });
 
+function validarCorreoExistente(correo) {
+    $.ajax({
+        type: 'POST',
+        url: '../vAdmin/pagesAjax/validarCorreoExistente.php',
+        data: 'correo=' + correo.value,
+        success: function (r) {
+            if (!$.trim(r)) {
+                $('#correoRepetido2').html(r);
+                formElements2.correoValid = true;
+            } else {
+                $('#correoRepetido2').html(r);
+                formElements2.correoValid = false;
+            }
+        }
+    });
+}
+
 
 username2.addEventListener('input', (e) => {
     e.target.value = e.target.value.replace(' ', '');
@@ -152,7 +171,7 @@ username2.addEventListener('input', (e) => {
     const username = e.target.value;
 
     if (username.length < 4 || username.length === 0) {
-        document.getElementById('userError2').innerHTML = 'El nombre de usuario debe tener al menos 4 caracteres';
+        document.getElementById('userError2').innerHTML = 'El nombre de usuario debe tener al menos 6 caracteres sin espacios y sin comillas simples';
         $('#userError2').css("color", "#F14B4B");
         formElements2.username = false;
     } else {
@@ -160,6 +179,23 @@ username2.addEventListener('input', (e) => {
         formElements2.username = true;
     }
 });
+
+function validarUsernameExistente(username) {
+    $.ajax({
+        type: 'POST',
+        url: '../vAdmin/pagesAjax/validarUsernameExistente.php',
+        data: 'username=' + username.value,
+        success: function (r) {
+            if (!$.trim(r)) {
+                $('#userRepetido2').html(r);
+                formElements2.usernameValid = true;
+            } else {
+                $('#userRepetido2').html(r);
+                formElements2.usernameValid = false;
+            }
+        }
+    })
+}
 
 pass2.addEventListener('input', (e) => {
     e.target.value = e.target.value.replace('\'', '"');

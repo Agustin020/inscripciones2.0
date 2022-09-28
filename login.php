@@ -38,19 +38,6 @@ session_start();
             justify-content: space-between;
         }
     </style>
-    
-    <script>
-        function validarCorreoExistente(correo) {
-            $.ajax({
-                type: 'POST',
-                url: 'vAdmin/pagesAjax/validarCorreoExistente.php',
-                data: 'correo=' + correo.value,
-                success: function(r) {
-                    $('#correoError').html(r);
-                }
-            });
-        }
-    </script>
 
 </head>
 
@@ -208,9 +195,10 @@ session_start();
                         </div>
 
                         <div class="form-floating mb-3" id="correo">
-                            <input type="email" class="form-control" oninput="validarCorreoExistente(this);" name="email" id="email" placeholder="Correo Electrónico" maxlength="50" maxlength="70" required>
+                            <input type="email" class="form-control" onchange="validarCorreoExistente(this);" oninput="validarCorreoExistente(this);" name="email" id="email" placeholder="Correo Electrónico" maxlength="50" maxlength="70" required>
                             <label for="floatingInput">Correo Electrónico</label>
                             <small id="correoError" class="form-text text-danger"></small>
+                            <small id="correoRepetido" class="text-danger"></small>
                         </div>
 
                         <div class="form-floating mb-3">
@@ -226,9 +214,10 @@ session_start();
                         </div>
 
                         <div class="form-floating mb-3">
-                            <input type="text" class="form-control" name="username" id="username" placeholder="Nombre de usuario" maxlength="30" required>
+                            <input type="text" class="form-control" onchange="validarUsernameExistente(this);" oninput="validarUsernameExistente(this);" name="username" id="username" placeholder="Nombre de usuario" maxlength="30" required>
                             <label for="floatingInput">Nombre de usuario</label>
-                            <small id="userError"></small>
+                            <small id="userError" class="text-danger"></small>
+                            <small id="userRepetido" class="text-danger"></small>
                         </div>
                         <div class="form-floating mb-3">
                             <input type="password" class="form-control" name="password" id="password" placeholder="Contraseña" maxlength="14" required>
