@@ -104,8 +104,25 @@ if (isset($_SESSION['rol'])) {
                                 <div class="col-xxl-3 d-flex flex-column justify-content-center">
                                     <div class="mb-3">
                                         <label for="" class="form-label">Condición</label>
-                                        <input type="text" class="form-control" name="condicion" id="condicion" value='<?= $califMateria[12] ?>' maxlength="45" aria-describedby="helpId" placeholder="">
-                                        <small id="condicionError"></small>
+                                        <select class="form-select" name="condicion" id="condicion">
+                                            <?php
+                                            if ($califMateria[12] != '') {
+                                            ?>
+                                                <option value="<?= $califMateria[12] ?>" selected><?= $califMateria[12] ?> (Actual)</option>
+                                            <?php
+                                            } else {
+                                            ?>
+                                                <option value="" selected>Seleccione...</option>
+                                            <?php
+                                            }
+                                            ?>
+                                            <option value="Aprobado">Aprobado</option>
+                                            <option value="Reprobado">Reprobado</option>
+                                            <option value="Regular">Regular</option>
+                                            <option value="Recursante">Recursante</option>
+                                            <option value="Libre">Libre</option>
+                                            <option value="">Dejar la lista vacía</option>
+                                        </select>
                                     </div>
                                 </div>
                             </div>

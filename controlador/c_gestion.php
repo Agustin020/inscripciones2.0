@@ -16,6 +16,19 @@ class ControladorGestion
         require('listarBajas.php');
     }
 
+    public function listarEstudiantesSinCarreraContr()
+    {
+        require('../modelo/m_consultas.php');
+        $co = new Consultas();
+        echo '<title>Listado de estudiantes sin carrera</title>';
+        $listEstudiantesSC = $co->listarEstudiantesSinCarrera();
+        require('libreria.php');
+        if (isset($_SESSION['rol'])) {
+            require('header.php');
+        }
+        require('listarEstSinCarrera.php');
+    }
+
     public function pageAgregarUsuarioContr()
     {
         require('../modelo/m_consultas.php');

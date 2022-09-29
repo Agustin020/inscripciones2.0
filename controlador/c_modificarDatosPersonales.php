@@ -27,11 +27,19 @@ if ($_SESSION['rol'] == 1) {
         session_start();
         $_SESSION['datosModificadosOk'] = true;
         header('Location: ../vEstudiante/gestion.php');
+    } else {
+        session_start();
+        $_SESSION['datosModificadosError'] = true;
+        header('Location: ../vEstudiante/gestion.php');
     }
-}else if($_SESSION['rol'] == 2 || $_SESSION['rol'] == 3){
+} else if ($_SESSION['rol'] == 2 || $_SESSION['rol'] == 3) {
     if ($co->modificarDatosPersonales($nombre, $apellido, $domicilio, $codPostalDep, $codPostal, $lugarNac, $fechaNac, $cel, $correo, $username, $contrasenia, $dni)) {
         session_start();
         $_SESSION['datosModificadosOk'] = true;
+        header('Location: ../vAdmin/gestion.php');
+    } else {
+        session_start();
+        $_SESSION['datosModificadosError'] = true;
         header('Location: ../vAdmin/gestion.php');
     }
 }

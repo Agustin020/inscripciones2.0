@@ -202,6 +202,21 @@ if (isset($_SESSION['username']['usuario']) && isset($_SESSION['rol'])) {
             <?php
                 unset($_SESSION['datosModificadosOk']);
             }
+
+            if ($_SESSION['datosModificadosError']) {
+            ?>
+
+                <script>
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Error!',
+                        text: 'El correo o el nombre de usuario que ingreso ya se encuentra registrado con otro usuario. Intente nuevamente.'
+                    })
+                </script>
+
+            <?php
+                unset($_SESSION['datosModificadosError']);
+            }
             ?>
 
             <section id="container">

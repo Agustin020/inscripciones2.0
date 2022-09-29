@@ -10,7 +10,7 @@ const califFinal2 = document.getElementById('notaFinal2');
 const fechaFinal2 = document.getElementById('fechaFinal2');
 const califFinal3 = document.getElementById('notaFinal3');
 const fechaFinal3 = document.getElementById('fechaFinal3');
-const condicion = document.getElementById('condicion');
+//const condicion = document.getElementById('condicion');
 
 const numero = /^[0-9]+$/;
 
@@ -452,24 +452,5 @@ fechaFinal3.addEventListener('input', (e) => {
 
 });
 
-condicion.addEventListener('input', (e) => {
-    e.target.value = e.target.value.replace('  ', ' ');
-    e.target.value = e.target.value.replace('\'', '"');
-    const condicion = e.target.value;
-
-    if (condicion.length === 0) {
-        document.getElementById('condicionError').innerHTML = '';
-        formElements2.condicion = true;
-    } else if (condicion.length < 4) {
-        document.getElementById('condicionError').innerHTML = 'Debe tener más de 4 caracteres';
-        $('#condicionError').css("color", "#F14B4B");
-
-        formElements2.condicion = false;
-    } else {
-        document.getElementById('condicionError').innerHTML = '';
-        formElements2.condicion = true;
-    }
-
-});
 
 

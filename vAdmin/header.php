@@ -355,6 +355,9 @@
                 <li class="nav-item">
                     <a class="nav-link" aria-current="page" href="index.php?accion=listarBajas">Listado de bajas</a>
                 </li>
+                <li class="nav-item">
+                    <a class="nav-link" aria-current="page" href="index.php?accion=listarEstudiantesSC">Estudiantes sin carrera</a>
+                </li>
 
             </ul>
         </div>

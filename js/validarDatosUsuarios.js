@@ -175,6 +175,9 @@ fechaNac.addEventListener('input', (e) => {
 
     if (fechaNac.length === 0) {
         document.getElementById('fechaNacError').innerHTML = 'Debe llenar la fecha de nacimiento';
+        formElements.fechaNac = false;
+    }else{
+        document.getElementById('fechaNacError').innerHTML = '';
         formElements.fechaNac = true;
     }
 

@@ -218,7 +218,7 @@ password.addEventListener('input', (e) => {
     const pass = e.target.value;
 
     if (pass.length < 8) {
-        document.getElementById('passError').innerHTML = 'La contraseña debe como minimo 8 caracteres sin espacios y sin comillas simples';
+        document.getElementById('passError').innerHTML = 'La contraseña debe tener como mínimo 8 caracteres sin espacios y sin comillas simples';
         $('#passError').css("color", "#F14B4B");
         formElements.password = false;
     } else {

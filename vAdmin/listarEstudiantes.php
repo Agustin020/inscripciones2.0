@@ -61,9 +61,9 @@ if (isset($_SESSION['username']['usuario']) && isset($_SESSION['rol'])) {
                         buttons: [{
                                 extend: 'excelHtml5',
                                 title: 'Listado de Estudiantes de ' + <?php echo $_GET['anio']; ?> + '° año',
-                                messageTop: 'Reporte: ' + localdate,
+                                messageTop: 'Informe: ' + localdate,
                                 exportOptions: {
-                                    columns: [0, 1, 2, 3, 4, 5, 6, 7]
+                                    columns: [0, 1, 2, 3, 4, 5, 6]
                                 }
                             },
                             {
@@ -72,9 +72,9 @@ if (isset($_SESSION['username']['usuario']) && isset($_SESSION['rol'])) {
                                 pageSize: 'A4',
                                 download: 'open',
                                 title: 'Listado de Estudiantes de ' + <?php echo $_GET['anio']; ?> + '° año',
-                                messageTop: 'Reporte: ' + localdate,
+                                messageTop: 'Informe: ' + localdate,
                                 exportOptions: {
-                                    columns: [0, 1, 2, 3, 4, 5, 6, 7]
+                                    columns: [0, 1, 2, 3, 4, 5, 6]
                                 }
                             },
                         ],

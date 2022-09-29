@@ -14,8 +14,10 @@ $rol = $_POST['rolUsuario'];
 
 if ($_SESSION['rol'] == 2) {
     if ($co->bajaUsuario($motivoBaja, $dni)) {
-        $_SESSION['bajaOk'] = true;
-        header('Location: ../vAdmin/index.php?accion=listarEstudiantes&anio&anio=' . $anio . '&sede=' . $sede);
+        if ($co->resetearInscripcion($dni)) {
+            $_SESSION['bajaOk'] = true;
+            header('Location: ../vAdmin/index.php?accion=listarEstudiantes&anio&anio=' . $anio . '&sede=' . $sede);
+        }
     }
 } else if ($_SESSION['rol'] == 3) {
     if ($rolUsuario == 2) {
@@ -30,8 +32,10 @@ if ($_SESSION['rol'] == 2) {
         }
     } else {
         if ($co->bajaUsuario($motivoBaja, $dni)) {
-            $_SESSION['bajaOk'] = true;
-            header('Location: ../vAdmin/index.php?accion=listarEstudiantesAdmin&anio=' . $anio);
+            if ($co->resetearInscripcion($dni)) {
+                $_SESSION['bajaOk'] = true;
+                header('Location: ../vAdmin/index.php?accion=listarEstudiantesAdmin&anio=' . $anio);
+            }
         }
     }
 }

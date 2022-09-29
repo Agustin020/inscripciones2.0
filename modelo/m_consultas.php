@@ -301,9 +301,9 @@ class Consultas extends Conexion
 
             $result = mysqli_query($link, $sql);
 
-            if($result){
+            if ($result) {
                 return true;
-            }else{
+            } else {
                 return false;
             }
         } catch (Exception $e) {
@@ -1039,6 +1039,31 @@ class Consultas extends Conexion
             die('Error: ' . $e->getMessage());
         }
         return $listBajas;
+    }
+
+    public function listarEstudiantesSinCarrera()
+    {
+        try {
+            $link = parent::Conexion();
+            $sql = "SELECT u.dni, u.nombre, u.apellido, u.correo, u.usuario, u.celular, d.nombre 
+                    from usuario u, departamentos d, rolusuario r  
+                    where u.codPostal2 = d.codPostal and u.idRol = r.id
+                    and u.dni in (select e.dni from estudiante e where e.idAnioCursado3 is null) ";
+            $result = mysqli_query($link, $sql);
+            $listBajas = [];
+            $i = 0;
+            while ($row = mysqli_fetch_row($result)) {
+                $listBajas[$i] = $row;
+                $i++;
+            }
+        } catch (Exception $e) {
+            die('Error: ' . $e->getMessage());
+        }
+        return $listBajas;
+    }
+
+    public function eliminarEstudiante($dni){
+
     }
 
 

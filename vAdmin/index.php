@@ -8,6 +8,11 @@ switch ($accion) {
         $controlador = new ControladorGestion();
         $controlador->listarBajasContr();
         break;
+    case 'listarEstudiantesSC':
+        require('../controlador/c_gestion.php');
+        $controlador = new ControladorGestion();
+        $controlador->listarEstudiantesSinCarreraContr();
+        break;
     case 'agregarUsuario':
         require('../controlador/c_gestion.php');
         $controlador = new ControladorGestion();
