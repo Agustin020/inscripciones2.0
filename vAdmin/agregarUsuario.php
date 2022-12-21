@@ -260,8 +260,8 @@ if (isset($_SESSION['rol'])) {
                                         </div>
 
                                         <div class="col-xxl">
-                                            <label for="" class="form-label">Fecha de nacimiento</label>
-                                            <input type="date" class="form-control" name="fechaNac" id="fechaNac2" aria-describedby="helpId" placeholder="">
+                                            <label for="" class="form-label">Fecha de nacimiento. Seleccionar</label>
+                                            <input type="date" class="form-control" name="fechaNac" id="fechaNac2" aria-describedby="helpId" onkeydown="return false;" placeholder="">
                                             <small id="fechaNacError2" class="form-text text-danger"></small>
                                         </div>
 

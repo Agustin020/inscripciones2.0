@@ -348,7 +348,7 @@ var fechaReversa = '';
 window.addEventListener('load', (e) => {
 
     var dateReversa = new Date();
-    dateReversa.setHours(-336);
+    dateReversa.setMonth(dateReversa.getMonth() - 12);
     var anioReversa = dateReversa.getFullYear();
     var mesReversa = String(dateReversa.getMonth() + 1).padStart(2, '0');
     var diaReversa = String(dateReversa.getDate()).padStart(2, '0');
@@ -390,17 +390,11 @@ window.addEventListener('load', (e) => {
 fechaFinal.addEventListener('input', (e) => {
     const fechaFinal = e.target.value;
 
-    if (fechaFinal < '2022-01-01') {
-        document.getElementById('fechaError').innerHTML = 'Debe ser mayor al año 2022';
-        $('#fechaError').css("color", "#F14B4B");
-        formElements2.fechaFinal = false;
-    } else {
-        document.getElementById('fechaError').innerHTML = '';
-        formElements2.fechaFinal = true;
-        fechaFinal2.value = '';
-        fechaFinal3.value = '';
-        fechaFinal2.min = fechaFinal;
-    }
+    document.getElementById('fechaError').innerHTML = '';
+    formElements2.fechaFinal = true;
+    fechaFinal2.value = '';
+    fechaFinal3.value = '';
+    fechaFinal2.min = fechaFinal;
 
     if (fechaFinal === '') {
         document.getElementById('fechaError').innerHTML = '';

@@ -38,6 +38,7 @@ form.addEventListener('submit', (e) => {
 
 nombre.addEventListener('input', (e) => {
     e.target.value = e.target.value.replace('  ', ' ');
+    e.target.value = e.target.value.replace('\'\'', '\'');
     const textExNom = /^[a-zA-ZéúíóáñÑÉÚÍÓÁ' ]*$/;
 
     if (!textExNom.test(e.target.value)) {
@@ -50,8 +51,11 @@ nombre.addEventListener('input', (e) => {
         document.getElementById('nombreError').innerHTML = 'El nombre debe tener al menos 3 caracteres';
         $('#nombreError').css("color", "#F14B4B");
         formElements.nombre = false;
-    }
-    else {
+    }else if(!textExNom.test(nombre)){
+        document.getElementById('nombreError').innerHTML = 'Solo debe ingresar texto';
+        $('#nombreError').css("color", "#F14B4B");
+        formElements.nombre = false;
+    }else {
         document.getElementById('nombreError').innerHTML = '';
         formElements.nombre = true;
     }
@@ -59,6 +63,7 @@ nombre.addEventListener('input', (e) => {
 
 apellido.addEventListener('input', (e) => {
     e.target.value = e.target.value.replace('  ', ' ');
+    e.target.value = e.target.value.replace('\'\'', '\'');
     const textExAp = /^[a-zA-ZéúíóáñÑÉÚÍÓÁ' ]*$/;
 
     if (!textExAp.test(e.target.value)) {
@@ -69,6 +74,10 @@ apellido.addEventListener('input', (e) => {
 
     if (apellido.length < 3) {
         document.getElementById('apellidoError').innerHTML = 'El apellido debe tener al menos 3 caracteres';
+        $('#apellidoError').css("color", "#F14B4B");
+        formElements.apellido = false;
+    }else if(!textExAp.test(apellido)){
+        document.getElementById('apellidoError').innerHTML = 'Solo debe ingresar texto';
         $('#apellidoError').css("color", "#F14B4B");
         formElements.apellido = false;
     } else {
@@ -137,20 +146,20 @@ dni.addEventListener('input', (e) => {
 
     const dni = e.target.value;
 
-    if (dni.length < 7) {
-        document.getElementById('dniError').innerHTML = 'El DNI debe tener 7 o 8 dígitos';
+    if (dni.length < 7 || !numero.test(dni)) {
+        document.getElementById('dniError').innerHTML = 'El DNI debe tener 7 u 8 dígitos númericos';
         $('#dniError').css("color", "#F14B4B");
         formElements.dni = false;
-    } else {
+    }else {
         document.getElementById('dniError').innerHTML = '';
         formElements.dni = true;
-    }
+    } 
 
-    if (dni < 10000000 || dni > 47000000) {
-        document.getElementById('dniError').innerHTML = 'El DNI debe tener entre 10000000 y 47000000';
+    if (dni < 10000000 || dni > 47000000 || !numero.test(dni)) {
+        document.getElementById('dniError').innerHTML = 'El DNI debe ser entre los números 10.000.000 y 47.000.000';
         $('#dniError').css("color", "#F14B4B");
         formElements.dni = false;
-    } else {
+    }else {
         document.getElementById('dniError').innerHTML = '';
         formElements.dni = true;
     }
@@ -164,14 +173,15 @@ cel.addEventListener('input', (e) => {
 
     const cel = e.target.value;
 
-    if (cel.length < 10) {
-        document.getElementById('celError').innerHTML = 'El número de celular debe tener 10 dígitos';
+    if (cel.length < 10 || !numero.test(cel)) {
+        document.getElementById('celError').innerHTML = 'El número de celular debe tener 10 dígitos númericos';
         $('#celError').css("color", "#F14B4B");
         formElements.cel = false;
     } else {
         document.getElementById('celError').innerHTML = '';
         formElements.cel = true;
     }
+
 
 });
 
@@ -186,10 +196,14 @@ username.addEventListener('input', (e) => {
     }
 
     if (username.length < 6) {
-        document.getElementById('userError').innerHTML = 'El nombre de usuario debe tener al menos 6 caracteres sin espacios y sin comillas simples';
+        document.getElementById('userError').innerHTML = 'El nombre de usuario debe tener al menos 6 caracteres no especiales y sin espacios';
         $('#userError').css("color", "#F14B4B");
         formElements.username = false;
-    } else {
+    } else if(!textEx.test(username)){
+         document.getElementById('userError').innerHTML = 'Debe ingresar solo texto';
+        $('#userError').css("color", "#F14B4B");
+        formElements.username = false;
+    }else {
         document.getElementById('userError').innerHTML = '';
         formElements.username = true;
     }
@@ -214,7 +228,7 @@ function validarUsernameExistente(username) {
 
 password.addEventListener('input', (e) => {
     e.target.value = e.target.value.replace(' ', '');
-    e.target.value = e.target.value.replace('\'', '"');
+    e.target.value = e.target.value.replace('\'', '');
     const pass = e.target.value;
 
     if (pass.length < 8) {

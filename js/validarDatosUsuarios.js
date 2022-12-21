@@ -15,6 +15,7 @@ const btnSubmit = document.getElementById('btnSubmitDatos');
 
 
 const textEx = /^[a-zA-ZéúíóáñÑÉÚÍÓÁ' ]*$/;
+const numEx = /^[0-9]$/
 
 const formElements = {
     nombre: true,
@@ -53,6 +54,7 @@ form.addEventListener('submit', (e) => {
 
 nombre.addEventListener('input', (e) => {
     e.target.value = e.target.value.replace('  ', ' ');
+    e.target.value = e.target.value.replace('\'\'', '\'');
 
     if (!textEx.test(e.target.value)) {
         e.target.value = e.target.value.substring(0, e.target.value.length - 1);
@@ -62,6 +64,9 @@ nombre.addEventListener('input', (e) => {
     if (nombre.length < 3) {
         document.getElementById('nombreError').innerHTML = 'El nombre debe tener al menos 3 caracteres';
         formElements.nombre = false;
+    }else if(!textEx.test(nombre)){
+        document.getElementById('nombreError').innerHTML = 'Solo debe ingresar texto';
+        formElements.nombre = false;
     } else {
         document.getElementById('nombreError').innerHTML = '';
         formElements.nombre = true;
@@ -70,16 +75,21 @@ nombre.addEventListener('input', (e) => {
 
 apellido.addEventListener('input', (e) => {
     e.target.value = e.target.value.replace('  ', ' ');
+    e.target.value = e.target.value.replace('\'\'', '\'');
 
     if (!textEx.test(e.target.value)) {
         e.target.value = e.target.value.substring(0, e.target.value.length - 1);
     }
 
     const apellido = e.target.value;
-    if (apellido.length < 4) {
-        document.getElementById('apellidoError').innerHTML = 'El apellido debe tener al menos 4 caracteres';
+    if (apellido.length < 3) {
+        document.getElementById('apellidoError').innerHTML = 'El apellido debe tener al menos 3 caracteres';
         formElements.apellido = false;
-    } else {
+    } else if (!textEx.test(apellido)){
+        document.getElementById('apellidoError').innerHTML = 'Solo debe ingresar texto';
+        formElements.apellido = false;
+    }
+    else {
         document.getElementById('apellidoError').innerHTML = '';
         formElements.apellido = true;
     }
@@ -120,9 +130,12 @@ cPostal.addEventListener('input', (e) => {
     const codigo = e.target.value;
 
     if (codigo.length < 4) {
-        document.getElementById('cpostalError').innerHTML = 'El código postal debe tener 4 dígitos';
+        document.getElementById('cpostalError').innerHTML = 'El código postal debe tener 4 dígitos númericos';
         formElements.cPostal = false;
-    } else {
+    }else if (!numero.test(codigo)){
+        document.getElementById('cpostalError').innerHTML = 'Solo debe ingresar numeros';
+        formElements.cPostal = false;
+    }else {
         document.getElementById('cpostalError').innerHTML = '';
         formElements.cPostal = true;
     }
@@ -161,26 +174,22 @@ window.addEventListener('load', (e) => {
 
 fechaNac.addEventListener('input', (e) => {
     const fechaNac = e.target.value;
-
+    const fechaNacE = new Date(fechaNac);
+    const year = fechaNacE.getFullYear();
     if (fechaNac > fecha) {
         document.getElementById('fechaNacError').innerHTML = 'No debe ser mayor a la fecha ' + fecha;
         formElements.fechaNac = false;
-    } else if (fechaNac < '1950-01-01') {
+    } else if (year < 1950) {
         document.getElementById('fechaNacError').innerHTML = 'No debe ser menor a la fecha 1950-01-01';
         formElements.fechaNac = false;
-    } else {
-        document.getElementById('fechaNacError').innerHTML = '';
-        formElements.fechaNac = true;
-    }
-
-    if (fechaNac.length === 0) {
-        document.getElementById('fechaNacError').innerHTML = 'Debe llenar la fecha de nacimiento';
+    }else if (fechaNac < '1950-01-01') {
+        document.getElementById('fechaNacError').innerHTML = 'La fecha de nacimiento debe ser válida: El campo está incompleto o es una fecha inválida.';
         formElements.fechaNac = false;
-    }else{
+    }
+    else {
         document.getElementById('fechaNacError').innerHTML = '';
         formElements.fechaNac = true;
     }
-
 });
 
 
@@ -193,9 +202,12 @@ cel.addEventListener('input', (e) => {
     const cel = e.target.value;
 
     if (cel.length < 10) {
-        document.getElementById('celError').innerHTML = 'El número de celular debe tener 10 dígitos';
+        document.getElementById('celError').innerHTML = 'El número de celular debe tener 10 dígitos númericos';
         formElements.cel = false;
-    } else {
+    }else if (!numero.test(cel)){
+        document.getElementById('celError').innerHTML = 'Solo debe ingresar numeros';
+        formElements.cel = false;
+    }  else {
         document.getElementById('celError').innerHTML = '';
         formElements.cel = true;
     }
@@ -229,9 +241,12 @@ username.addEventListener('input', (e) => {
     const username = e.target.value;
 
     if (username.length < 6) {
-        document.getElementById('userError').innerHTML = 'El nombre de usuario debe tener al menos 6 caracteres';
+        document.getElementById('userError').innerHTML = 'El nombre de usuario debe tener al menos 6 caracteres no especiales y sin espacios';
         formElements.username = false;
-    } else {
+   }else if (!textEx.test(username)){ 
+         document.getElementById('userError').innerHTML = 'Solo debe ingresar texto';
+        formElements.username = false;
+    }else {
         document.getElementById('userError').innerHTML = '';
         formElements.username = true;
     }
@@ -239,11 +254,11 @@ username.addEventListener('input', (e) => {
 
 passNueva.addEventListener('input', (e) => {
     e.target.value = e.target.value.replace(' ', '');
-    e.target.value = e.target.value.replace('\'', '"');
+    e.target.value = e.target.value.replace('\'', '');
     const pass = e.target.value;
 
     if (pass.length < 8) {
-        document.getElementById('passNuevaError').innerHTML = 'La contraseña debe como mínimo 8 caracteres sin espacios y sin comillas simples';
+        document.getElementById('passNuevaError').innerHTML = 'La contraseña debe tener como mínimo 8 caracteres sin espacios y sin comillas simples';
         formElements.passNueva = false;
     } else {
         document.getElementById('passNuevaError').innerHTML = '';
@@ -258,6 +273,11 @@ passNueva.addEventListener('input', (e) => {
         document.getElementById('passRepetidaError').innerHTML = '';
         formElements.passRepetida = true;
     }
+    
+    if(passRepetida.value === ''){
+        document.getElementById('passRepetidaError').innerHTML = '';
+        formElements.passRepetida = false;
+    }
 
 
 });
@@ -265,15 +285,10 @@ passNueva.addEventListener('input', (e) => {
 
 passRepetida.addEventListener('input', (e) => {
     e.target.value = e.target.value.replace(' ', '');
-    e.target.value = e.target.value.replace('\'', '"');
+    e.target.value = e.target.value.replace('\'', '');
     const passRepetida = e.target.value;
 
-    if (passRepetida.length < 8) {
-        document.getElementById('passRepetidaError').innerHTML = 'La contraseña debe como mínimo 8 caracteres sin espacios y sin comillas simples';
-        formElements.passRepetida = false;
-    }
-
-    else if (passRepetida !== passNueva.value) {
+     if (passRepetida !== passNueva.value) {
         document.getElementById('passRepetidaError').innerHTML = 'Las contraseñas deben ser iguales';
         formElements.passRepetida = false;
     } else {
@@ -281,8 +296,6 @@ passRepetida.addEventListener('input', (e) => {
         formElements.passRepetida = true;
     }
 });
-
-
 
 
 //FORMULARIO VACIO---
@@ -355,12 +368,10 @@ lugarNac.addEventListener('invalid', (e) => {
 fechaNac.addEventListener('invalid', (e) => {
     e.preventDefault();
     e.target.setCustomValidity('');
-
     if (e.target.value.length === 0) {
-        document.getElementById('fechaNacError').innerHTML = 'Este campo es obligatorio';
+        document.getElementById('fechaNacError').innerHTML = 'La fecha de nacimiento debe ser válida: El campo está incompleto o es una fecha inválida.';
         formElements.fechaNac = false;
     }
-
 });
 
 cel.addEventListener('invalid', (e) => {

@@ -677,8 +677,8 @@ class Consultas extends Conexion
     {
         try {
             $link = parent::Conexion();
-            $sql = "SELECT u.dni, u.nombre, u.apellido, u.correo, u.celular, u.usuario from usuario u 
-                    where u.idRol is null";
+            $sql = "SELECT u.dni, u.nombre, u.apellido, u.correo, u.celular, u.usuario FROM usuario u
+                    WHERE u.idRol IS NULL AND u.fechaBaja IS NULL";
             $result = mysqli_query($link, $sql);
             $listSolicitudAlta = [];
             $i = 0;
@@ -1027,7 +1027,9 @@ class Consultas extends Conexion
     {
         try {
             $link = parent::Conexion();
-            $sql = "SELECT u.dni, concat(u.nombre, ' ', u.apellido), u.correo, u.celular, s.nombre, u.fechaBaja, u.motivoBaja from usuario u, sede s, usuario_sede us where u.dni = us.dniUsuario4 and us.codigoSede3 = s.codigo and u.idRol is null";
+            $sql = "SELECT u.dni, concat(u.nombre, ' ', u.apellido), u.correo, u.celular, u.fechaBaja, u.motivoBaja 
+                    from usuario u
+                    where u.idRol is null and u.fechaBaja is not null  ";
             $result = mysqli_query($link, $sql);
             $listBajas = [];
             $i = 0;

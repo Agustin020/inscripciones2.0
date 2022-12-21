@@ -203,7 +203,7 @@ if (isset($_SESSION['rol'])) {
                                             <input type="text" class="form-control" id="inputSede" value="<?php echo $datoInscripcion[6]; ?>" readonly>
                                         </div>
                                         <div class="col-md-12">
-                                            <label for="textareaMaterias" class="form-label">Materias</label>
+                                            <label for="textareaMaterias" class="form-label">Materias en las que solicita inscribirse</label>
                                             <textarea class="form-control" id="textareaMaterias" rows="6" readonly><?php echo $datoInscripcion[7]; ?></textarea>
                                         </div>
 

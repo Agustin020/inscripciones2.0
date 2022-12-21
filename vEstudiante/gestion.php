@@ -194,7 +194,7 @@ if (isset($_SESSION['username']['usuario']) && isset($_SESSION['rol'])) {
                     Swal.fire({
                         icon: 'success',
                         title: 'Listo',
-                        text: 'Tus datos personales han sido modificados'
+                        text: 'Tus datos personales han sido modificados. En caso de no ver los cambios, cerrar sesión y volvé a ingresar.'
                     })
                 </script>
             <?php

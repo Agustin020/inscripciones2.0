@@ -47,7 +47,6 @@ if (isset($_SESSION['rol'])) {
                             <th>Nombre y Apellido</th>
                             <th>Correo</th>
                             <th>Celular</th>
-                            <th>Sede</th>
                             <th>Fecha Baja</th>
                             <th>Motivo baja</th>
                         </thead>
@@ -60,17 +59,16 @@ if (isset($_SESSION['rol'])) {
                                     <td><?php echo $usuario[1]; ?></td>
                                     <td><?php echo $usuario[2]; ?></td>
                                     <td><?php echo $usuario[3]; ?></td>
-                                    <td><?php echo $usuario[4]; ?></td>
                                     <td>
                                         <?php
-                                        if ($usuario[5] != '') {
-                                            $date = date_create($usuario[5]);
+                                        if ($usuario[4] != '') {
+                                            $date = date_create($usuario[4]);
                                             $fechaBaja = date_format($date, 'd/m/Y');
                                             echo $fechaBaja;
                                         }
                                         ?>
                                     </td>
-                                    <td><?php echo $usuario[6]; ?></td>
+                                    <td><?php echo $usuario[5]; ?></td>
                                 </tr>
                             <?php
                             }
